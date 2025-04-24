@@ -13,7 +13,7 @@ class Program
         int x = 10;
         if (x == 10)
         {
-            Console.WriteLine("x is 10.")
+            Console.WriteLine("x is 10.");
         }
     }
 }
