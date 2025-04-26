@@ -32,6 +32,31 @@ class Program
             gradeLetter = "F";
         }
 
+        // stretch challenge
+        if (gradeLetter != "F")
+        {
+            int gradeModifier = grade % 10;
+
+            if (gradeLetter == "A")
+            {
+                if (gradeModifier <= 2)
+                {
+                    gradeLetter += "-";
+                }
+            }
+            else
+            {
+                if (gradeModifier >= 7)
+                {
+                    gradeLetter += "+";
+                }
+                else if (gradeModifier <=2)
+                {
+                    gradeLetter += "-";
+                }
+            }
+        }
+
         Console.WriteLine($"\nYour grade is {gradeLetter}");
 
         if (grade >= 70)
@@ -40,7 +65,7 @@ class Program
         }
         else
         {
-            Console.WriteLine("You failed the class. :(");
+            Console.WriteLine("You failed the class :(");
         }
     }
 }
