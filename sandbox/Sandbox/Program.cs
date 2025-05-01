@@ -8,6 +8,11 @@ class Program
         return a + b;
     }
 
+    static void DisplayGreeting()
+    {
+        Console.WriteLine("Hello");
+    }
+
     static void Main(string[] args)
     {
         // int x = 10;
@@ -42,5 +47,7 @@ class Program
 
         double total = AddNumbers(123.98, 984.234);
         Console.WriteLine(total);
+
+        DisplayGreeting();
     }
 }
