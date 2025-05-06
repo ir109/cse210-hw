@@ -1,53 +1,38 @@
 using System;
-
+class Circle
+{
+    private double _radius; //can only be used in "class Circle"
+    public void SetRadius(double radius) //can be used outside of "class Circle"
+    {
+        if(radius < 0)
+        {
+            Console.WriteLine("Error. Radius must be > 0");
+            return;
+        }
+        _radius = radius; //"_radius" is the attribute, "radius" os the parameter
+    }
+    public double GetRadius()
+    {
+        return _radius;
+    }
+    public double GetArea()
+    {
+        return Math.PI * _radius * _radius;
+    }
+}
 class Program
 {
-
-    static double AddNumbers(double a, double b)
-    {
-        return a + b;
-    }
-
-    static void DisplayGreeting()
-    {
-        Console.WriteLine("Hello");
-    }
-
     static void Main(string[] args)
     {
-        // int x = 10;
-        // if (x == 10)
-        // {
-        //     Console.WriteLine("x is 10.");
-        // }
+        Circle myCircle = new Circle(); //compiles a new circle
+        myCircle.SetRadius(5);
+        Console.WriteLine($"Radius 1 = {myCircle.GetRadius()}");
 
-        // Console.WriteLine("Hello, boyos.");
+        Circle myCircle2 = new Circle(); //compiles a new circle
+        myCircle2.SetRadius(20);
+        Console.WriteLine($"Radius 2 = {myCircle2.GetRadius()}");
 
-        // for(int i = 0; i < 20; i++)
-        // {
-        //     Console.WriteLine($"Hello, Joe. {i}");
-        // }
-
-        // int x = 0;
-        // int y;
-        // x++;
-        // y = x;
-        // Console.WriteLine(x);
-        // Console.WriteLine(y);
-
-        // List<int> myNumbers = new List<int>();
-        // myNumbers.Add(99);
-        // myNumbers.Add(2);
-        // myNumbers.Add(45);
-        // myNumbers.Add(356);
-        
-        // foreach(int i in myNumbers)
-        // {
-        //     Console.WriteLine(i);
-
-        double total = AddNumbers(123.98, 984.234);
-        Console.WriteLine(total);
-
-        DisplayGreeting();
+        Console.WriteLine($"Area 1 = {myCircle.GetArea()}");
+        Console.WriteLine($"Area 2 = {myCircle2.GetArea()}");
     }
 }
