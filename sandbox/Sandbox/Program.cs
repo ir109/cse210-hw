@@ -1,25 +1,5 @@
 using System;
-class Circle
-{
-    private double _radius; //can only be used in "class Circle"
-    public void SetRadius(double radius) //can be used outside of "class Circle"
-    {
-        if(radius < 0)
-        {
-            Console.WriteLine("Error. Radius must be > 0");
-            return;
-        }
-        _radius = radius; //"_radius" is the attribute, "radius" os the parameter
-    }
-    public double GetRadius()
-    {
-        return _radius;
-    }
-    public double GetArea()
-    {
-        return Math.PI * _radius * _radius;
-    }
-}
+
 class Program
 {
     static void Main(string[] args)
@@ -34,5 +14,11 @@ class Program
 
         Console.WriteLine($"Area 1 = {myCircle.GetArea()}");
         Console.WriteLine($"Area 2 = {myCircle2.GetArea()}");
+
+        Cylinder myCylinder = new Cylinder(); //compiles a new cylinder
+        myCylinder.SetHeight(10);
+        myCylinder.SetCircle(myCircle); //sets the circle for the cylinder
+        Console.WriteLine($"Volume of cylinder: {myCylinder.GetVolume()}"); //compiles the volume of the cylinder
+        myCylinder.SetCircle(myCircle2); //sets the circle for the cylinder
     }
 }
