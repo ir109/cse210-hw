@@ -10,7 +10,7 @@ public class Circle
             Console.WriteLine("Error. Radius must be > 0");
             return;
         }
-        _radius = radius; //"_radius" is the attribute, "radius" os the parameter
+        _radius = radius; //"_radius" is the attribute, "radius" is the parameter
     }
     public double GetRadius()
     {

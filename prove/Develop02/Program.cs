@@ -1,9 +1,15 @@
 using System;
+using System.ComponentModel.Design;
+using System.IO;
 
 class Program
 {
-    static void Main(string[] args)
+    private static void Main(string[] args) // Starts program
     {
-        Console.WriteLine("Hello Develop02 World!");
+        Journal myJournal = new Journal();
+        PromptGenerator generator = new PromptGenerator();
+        Menu mainMenu = new Menu(myJournal, generator);
+
+        mainMenu.Run();
     }
 }
