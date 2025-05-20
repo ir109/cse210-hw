@@ -6,6 +6,41 @@ public class Cylinder
 
     private double _height;
 
+//  default constructor example
+//  public Cylinder()
+//  {
+//      _height = 0;
+//      _circle = null;
+//  }
+
+//  non-default constructor example
+//  public Cylinder(Circle cirle)
+//  {
+//      _circle = circle;
+//      _height = 0;
+//  }
+// or
+//  non-default constructor example
+//  public Cylinder(Double height, Circle cirle)
+//  {
+//      _circle = circle;
+//      _height = height;
+//  }
+// or
+//  non-default constructor example
+//  public Cylinder(Double height, double radius)
+//  {
+//      _height = height
+//      _circle = new Circle(radius);
+//  }
+//or
+//  non-default constructor example
+//  public Cylinder(Double height)
+//  {
+//      _circle = circle;
+//      SetHeight(10);
+//  }
+
     public void SetCircle(Circle circle)
     {
         _circle = circle;

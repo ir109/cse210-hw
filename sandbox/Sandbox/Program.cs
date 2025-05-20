@@ -20,5 +20,9 @@ class Program
         myCylinder.SetCircle(myCircle); //sets the circle for the cylinder
         Console.WriteLine($"Volume of cylinder: {myCylinder.GetVolume()}"); //compiles the volume of the cylinder
         myCylinder.SetCircle(myCircle2); //sets the circle for the cylinder
+
+// With constructors
+//  Cylinder myCylinder = new Cylinder(100, 8);
+//  Console.WriteLine(myCylinder.GetVolume())
     }
 }

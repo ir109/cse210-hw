@@ -3,7 +3,20 @@ using System;
 public class Circle
 {
     private double _radius; //can only be used in "class Circle"
-    public void SetRadius(double radius) //can be used outside of "class Circle"
+
+    //default constructor examole
+    //public Circle()
+    //{
+    //  _radius = 0.0;
+    //}
+
+    //non-default constructor example
+    //public Circle(double radius)
+    //{
+    //  SetRadius(radius);
+    //}
+
+    public void SetRadius(double radius) //gives parameters to be used outside of "class Circle"
     {
         if(radius < 0)
         {
