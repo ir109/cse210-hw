@@ -1,10 +1,14 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using System;
+// See https://aka.ms/new-console-template for more information
 class Program
 {
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
-        WordCounter wordCounter = new WordCounter();
+        WordCounter wordCounter = new WordCounter("This is a test sentence");
+        wordCounter.DisplayWords();
+
+        int count = wordCounter.CountSingleWord("is");
+        Console.WriteLine(count);
     }
 }
-    
     
