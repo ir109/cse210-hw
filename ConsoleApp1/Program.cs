@@ -9,24 +9,38 @@ class Program
         int sleepTime = 350;
         int count = duration;
 
-        //countdown
+
+
+        //face animation
+        string animation = "(^_^)(-_-)";
         while (DateTime.Now < endTime)
         {
-            Console.Write(count--);
-            Thread.Sleep(1000);
-            Console.Write("\b");
+            Console.Write(animation[0..5]);
+            Thread.Sleep(sleepTime);
+            Console.Write("\b\b\b\b\b");
+            Console.Write(animation[5..]);
+            Thread.Sleep(sleepTime);
+            Console.Write("\b\b\b\b\b");
         }
 
-        //spinner
-        while (DateTime.Now < endTime)
-        {
-            Console.Write("+");
-            Thread.Sleep(sleepTime);
-            Console.Write("\b");
-            Console.Write("-");
-            Thread.Sleep(sleepTime);
-            Console.Write("\b");
-        }
+        //countdown
+        //     while (DateTime.Now < endTime)
+        //     {
+        //         Console.Write(count--);
+        //         Thread.Sleep(1000);
+        //         Console.Write("\b");
+        //     }
+
+        // //spinner
+        // while (DateTime.Now < endTime)
+        // {
+        //     Console.Write("+");
+        //     Thread.Sleep(sleepTime);
+        //     Console.Write("\b");
+        //     Console.Write("-");
+        //     Thread.Sleep(sleepTime);
+        //     Console.Write("\b");
+        // }
     }
 }
 
