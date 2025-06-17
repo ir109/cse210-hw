@@ -26,6 +26,6 @@ class Program
     private static void DisplayPersonInformation(Person person)
     {
         Console.Write(person.GetPersonInformation());
-        Console.WriteLine(person.GetSalary());
+        Console.WriteLine($"Salary: ${person.GetSalary()}");
     }
 }
