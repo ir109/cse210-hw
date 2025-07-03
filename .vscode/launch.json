@@ -251,5 +251,17 @@
             "stopAtEntry": false
         },
 
+        {
+            "name": "Person",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-Person",
+            "program": "${workspaceFolder}/Person/bin/Debug/net8.0/Person.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Person",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "stopAtEntry": false
+        },
     ]
 }
