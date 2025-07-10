@@ -2,27 +2,31 @@ using System;
 
 class Program
 {
+    static void TestByRef(ref int x, ref string n)
+    {
+        x++;
+        n += " plus a ";
+        Console.WriteLine($"In TestByRef: {x}, {n}");
+    }
+    static void TestByOut(out int a)
+    {
+        a = 121;
+        Console.WriteLine($"In TestByOut: a = {a}");
+    }
     static void Main(string[] args)
     {
-        Circle myCircle = new Circle(); //compiles a new circle
-        myCircle.SetRadius(5);
-        Console.WriteLine($"Radius 1 = {myCircle.GetRadius()}");
+        int z = 10;
+        string name = "e";
 
-        Circle myCircle2 = new Circle(); //compiles a new circle
-        myCircle2.SetRadius(20);
-        Console.WriteLine($"Radius 2 = {myCircle2.GetRadius()}");
+        TestByRef(ref z, ref name);
+        Console.WriteLine($"In main: {z}, {name}");
 
-        Console.WriteLine($"Area 1 = {myCircle.GetArea()}");
-        Console.WriteLine($"Area 2 = {myCircle2.GetArea()}");
+        name += "i";
+        TestByRef(ref z, ref name);
+        Console.WriteLine($"In main: {z}, {name}");
 
-        Cylinder myCylinder = new Cylinder(); //compiles a new cylinder
-        myCylinder.SetHeight(10);
-        myCylinder.SetCircle(myCircle); //sets the circle for the cylinder
-        Console.WriteLine($"Volume of cylinder: {myCylinder.GetVolume()}"); //compiles the volume of the cylinder
-        myCylinder.SetCircle(myCircle2); //sets the circle for the cylinder
-
-// With constructors
-//  Cylinder myCylinder = new Cylinder(100, 8);
-//  Console.WriteLine(myCylinder.GetVolume())
+        int c;
+        TestByOut(out c);
+        Console.WriteLine($"In Main: c = {c}");
     }
 }
