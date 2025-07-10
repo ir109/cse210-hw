@@ -2,31 +2,34 @@ using System;
 
 class Program
 {
-    static void TestByRef(ref int x, ref string n)
-    {
-        x++;
-        n += " plus a ";
-        Console.WriteLine($"In TestByRef: {x}, {n}");
-    }
-    static void TestByOut(out int a)
-    {
-        a = 121;
-        Console.WriteLine($"In TestByOut: a = {a}");
-    }
     static void Main(string[] args)
     {
-        int z = 10;
-        string name = "e";
+        //?
+        int? x = 31;
+        string? name = "el";
 
-        TestByRef(ref z, ref name);
-        Console.WriteLine($"In main: {z}, {name}");
+        //??
+        int y = x ?? 23; //if x is null, uses y
+        Console.WriteLine(y);
 
-        name += "i";
-        TestByRef(ref z, ref name);
-        Console.WriteLine($"In main: {z}, {name}");
+        name ??= "em"; //if name is null, uses e
+        Console.WriteLine(name);
 
-        int c;
-        TestByOut(out c);
-        Console.WriteLine($"In Main: c = {c}");
+        //?.
+        string myName = null;
+        int? length = myName?.Length;
+        Console.WriteLine(length);
+
+        //?:
+        int age1 = 23;
+        int age2 = 32;
+        string older = age1 > age2 ? "1 is older" : "2 is older";
+        Console.WriteLine(older);
+        //can be written in if/else
+        if (age1 > age2)
+            older = "1 is older";
+        else
+            older = "2 is older";
+        Console.WriteLine(older);
     }
 }
