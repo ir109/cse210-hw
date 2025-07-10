@@ -22,7 +22,7 @@ public class Menu
             {
                 case 1:
                     Console.WriteLine("Case 1\n");
-                    //add goal
+                    DisplayCreateGoalMenu();
                     break;
                 case 2:
                     Console.WriteLine("Case 2\n");
@@ -56,8 +56,38 @@ public class Menu
         return menuInput;
     }
         
-    // public int DisplayCreateGoalMenu()
-    // {
-
-    // }
+    public void DisplayCreateGoalMenu()
+    {
+        int menuInput;
+        string menu =
+@$"Selection:
+1. Simple Goal
+2. Eternal Goal
+3. Check List Goal
+";
+        Console.WriteLine(menu);
+        menuInput = int.Parse(Console.ReadLine());
+        switch (menuInput)
+        {
+            case 1:
+            Console.WriteLine("Case 1\n");
+                //DisplayCreateGoalMenu()
+                break;
+            case 2:
+                Console.WriteLine("Case 2\n");
+                //save
+                break;
+            case 3:
+                Console.WriteLine("Case 3\n");
+                //load
+                break;
+            case 0:
+                Console.WriteLine("Exiting");
+                //exit
+                break;
+            default:
+                Console.WriteLine("Invalid selection.\n");
+                break;
+        }
+    }
 }

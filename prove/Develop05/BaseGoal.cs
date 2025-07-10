@@ -32,7 +32,8 @@ public abstract class BaseGoal
     }
     public int MarkComplete()
     {
-        return 0;
+        _status = true;
+        return _points;
     }
     public virtual string GetGoalType()
     {
