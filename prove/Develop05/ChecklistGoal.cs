@@ -8,6 +8,11 @@ public class ChecklistGoal : BaseGoal
     private int _numberOfCompletions;
     private int _maxGoals;
     private int _bonusPoints;
+
+    public ChecklistGoal()
+    {
+        _goalType = "CheckListGoal";
+    }
     public ChecklistGoal(string name, string description, int points, bool status, int completions, int max, int bonus)
     : base(name, description, points, status)
     {
@@ -15,33 +20,29 @@ public class ChecklistGoal : BaseGoal
         _maxGoals = max;
         _bonusPoints = bonus;
     }
-    public ChecklistGoal() : base("","",0,false)
-    {
-
-    }
     public override void RunGoal()
     {
-        throw new NotImplementedException();
+        Console.WriteLine("Running Checklist Goal...");
     }
     public override int RecordEvent()
     {
-        // throw new NotImplementedException();
+        _numberOfCompletions++;
+    
+        _numberOfCompletions++;
+        if (_numberOfCompletions >= _maxGoals)
+        {
+            MarkComplete();
+            return GetPoints() + _bonusPoints;
+        }
+    
         return GetPoints();
     }
     public override string ToString()
     {
-        return base.ToString();
+        return $"{_goalType}:{_name},{_description},{_points},{_numberOfCompletions},{_maxGoals},{_bonusPoints}";
     }
     public override string ListGoal()
     {
-        return base.ListGoal();
-    }
-    private void ObtainMaxGoal()
-    {
-
-    }
-    private void ObtainBonusPoints()
-    {
-        
+        return $"{_name} ({_numberOfCompletions}/{_maxGoals})";
     }
 }

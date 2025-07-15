@@ -4,35 +4,28 @@ public class EternalGoal : BaseGoal
 {
     private int _numberOfCompletions;
 
+    public EternalGoal()
+    {
+        _goalType = "EternalGoal";
+    }
     public EternalGoal(string name, string description, int points, bool status, int completions)
     : base(name, description, points, status)
     {
+        _goalType = "EternalGoal";
         _numberOfCompletions = completions;
-    }
-    public EternalGoal() : base("","",0,false)
-    {
-
     }
     public override void RunGoal()
     {
-        throw new NotImplementedException();
+        Console.WriteLine("Running Eternal Goal...");
     }
-    public override string GetGoalType()
-    {
-        return base.GetGoalType();
-    }
+    // public override string GetGoalType()
+    // {
+    //     return base.GetGoalType();
+    // }
     public override int RecordEvent()
     {
-        //throw new NotImplementedException();
+        _numberOfCompletions++;
         return GetPoints();
-    }
-    public override string ToString()
-    {
-        return base.ToString();
-    }
-    public override string ListGoal()
-    {
-        return base.ListGoal();
     }
 }
 

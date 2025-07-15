@@ -2,20 +2,27 @@ using System;
 
 public class SimpleGoal : BaseGoal
 {
-    public SimpleGoal(string name, string description, int points, bool status)
-    : base(name, description, points, status) { }
-    public SimpleGoal() : base("","",0,false)
+    public SimpleGoal()
     {
-        
+        _goalType = "SimpleGoal";
+    }
+    public SimpleGoal(string name, string description, int points, bool status)
+    : base(name, description, points, status)
+    {
+        _goalType = "SimpleGoal";
     }
     public override void RunGoal()
     {
-        //throw new NotImplementedException();
+        Console.WriteLine("Running Simple Goal...");
     }
     public override int RecordEvent()
     {
-        //throw new NotImplementedException();
-        return GetPoints();
+        if (!_status)
+        {
+            MarkComplete();
+            return GetPoints();
+        }
+        return 0;
     }
     
 }

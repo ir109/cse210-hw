@@ -3,7 +3,6 @@ public class Menu
 {
     public int DisplayMenu()
     {
-        int menuInput;
         string menu =
 @$"Selection:
 1. Add Goal
@@ -14,51 +13,13 @@ public class Menu
 6. Record Event
 0. Exit
 ";
-        do
-        {
-            Console.WriteLine(menu);
-            menuInput = int.Parse(Console.ReadLine());
-            switch (menuInput)
-            {
-                case 1:
-                    Console.WriteLine("Case 1\n");
-                    DisplayCreateGoalMenu();
-                    break;
-                case 2:
-                    Console.WriteLine("Case 2\n");
-                    //save
-                    break;
-                case 3:
-                    Console.WriteLine("Case 3\n");
-                    //load
-                    break;
-                case 4:
-                    Console.WriteLine("Case 4\n");
-                    //display goals
-                    break;
-                case 5:
-                    Console.WriteLine("Case 5\n");
-                    //display score
-                    break;
-                case 6:
-                    Console.WriteLine("Case 6\n");
-                    //record event
-                    break;
-                case 0:
-                    Console.WriteLine("Exiting");
-                    //exit
-                    break;
-                default:
-                    Console.WriteLine("Invalid selection.\n");
-                    break;
-            }
-        } while (menuInput != 0);
+        Console.WriteLine(menu);
+        Console.Write("Enter your selection: ");
+        int menuInput = int.Parse(Console.ReadLine());
         return menuInput;
     }
-        
-    public void DisplayCreateGoalMenu()
+    public int DisplayCreateGoalMenu()
     {
-        int menuInput;
         string menu =
 @$"Selection:
 1. Simple Goal
@@ -66,28 +27,8 @@ public class Menu
 3. Check List Goal
 ";
         Console.WriteLine(menu);
-        menuInput = int.Parse(Console.ReadLine());
-        switch (menuInput)
-        {
-            case 1:
-            Console.WriteLine("Case 1\n");
-                //DisplayCreateGoalMenu()
-                break;
-            case 2:
-                Console.WriteLine("Case 2\n");
-                //save
-                break;
-            case 3:
-                Console.WriteLine("Case 3\n");
-                //load
-                break;
-            case 0:
-                Console.WriteLine("Exiting");
-                //exit
-                break;
-            default:
-                Console.WriteLine("Invalid selection.\n");
-                break;
-        }
+        Console.Write("Select a new goal to create: ");
+        int menuInput = int.Parse(Console.ReadLine());
+        return menuInput;
     }
 }

@@ -2,11 +2,13 @@ using System;
 using System.Security.Cryptography.X509Certificates;
 public abstract class BaseGoal
 {
-    private string _name;
-    private string _description;
-    private int _points;
-    private bool _status;
+    protected string _name;
+    protected string _description;
+    protected int _points;
+    protected bool _status;
+    protected string _goalType;
 
+    public BaseGoal() {}
     public BaseGoal(string name, string description, int points, bool status)
     {
         _name = name;
@@ -30,22 +32,26 @@ public abstract class BaseGoal
     {
         return _points;
     }
-    public int MarkComplete()
+    public void MarkComplete()
     {
         _status = true;
-        return _points;
+
     }
     public virtual string GetGoalType()
     {
-        return "";
+        return _goalType;
     }
     public virtual string ListGoal()
     {
-        return "";
+        return $"{_name} - {_description}";
     }
     public override string ToString()
     {
-        return base.ToString();
+        return $"{_goalType}: {_name} \n{_description} \nPoints: {_points}";
+    }
+    public bool GetStatus()
+    {
+        return _status;
     }
     public abstract int RecordEvent();
     public abstract void RunGoal();
