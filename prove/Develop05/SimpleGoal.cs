@@ -23,5 +23,9 @@ public class SimpleGoal : BaseGoal
             return GetPoints();
         }
         return 0;
-    }    
+    }
+    public override string GetStringRep()
+    {
+        return $"{_goalType}:{_name},{_description},{_points},{_status}";
+    }
 }

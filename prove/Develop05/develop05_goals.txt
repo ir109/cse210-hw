@@ -1,3 +1,2 @@
-SimpleGoal: Goal test 
-test 
-Points: 1
+0
+SimpleGoal:Test goal,test,1,False

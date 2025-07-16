@@ -16,26 +16,25 @@ public abstract class BaseGoal
         _points = points;
         _status = status;
     }
-    public void DisplayName()
+    public string GetName()
     {
-        Console.WriteLine(_name);
+        return _name;
     }
-    public void DisplayDescription()
+    public string GetDescription()
     {
-        Console.WriteLine(_description);
-    }
-    public void DisplayPoints()
-    {
-        Console.WriteLine(_points);
+        return _description;
     }
     public int GetPoints()
     {
         return _points;
     }
+    public bool GetStatus()
+    {
+        return _status;
+    }
     public void MarkComplete()
     {
         _status = true;
-
     }
     public virtual string GetGoalType()
     {
@@ -43,16 +42,14 @@ public abstract class BaseGoal
     }
     public virtual string ListGoal()
     {
+        // string statusMarker = _status ? "[x]" : "[ ]";
         return $"{_name} - {_description}, Points: {_points}";
     }
     public override string ToString()
     {
         return $"{_goalType}: {_name} \n{_description} \nPoints: {_points}";
     }
-    public bool GetStatus()
-    {
-        return _status;
-    }
+    public abstract string GetStringRep();
     public abstract int RecordEvent();
     public abstract void RunGoal();
 }

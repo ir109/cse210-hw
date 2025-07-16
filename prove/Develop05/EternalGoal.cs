@@ -18,14 +18,14 @@ public class EternalGoal : BaseGoal
     {
         Console.WriteLine("Running Eternal Goal...");
     }
-    // public override string GetGoalType()
-    // {
-    //     return base.GetGoalType();
-    // }
     public override int RecordEvent()
     {
         _numberOfCompletions++;
         return GetPoints();
+    }
+    public override string GetStringRep()
+    {
+        return $"{_goalType}:{_name},{_description},{_points},{_status},{_numberOfCompletions}";
     }
 }
 

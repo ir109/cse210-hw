@@ -26,7 +26,7 @@ public class ChecklistGoal : BaseGoal
     }
     public override int RecordEvent()
     {
-        if (_numberOfCompletions < _maxGoals)
+        if (!_status)
         {
             _numberOfCompletions++;
             if (_numberOfCompletions == _maxGoals)
@@ -38,7 +38,7 @@ public class ChecklistGoal : BaseGoal
         }
         return 0;
     }
-    public override string ToString()
+    public override string GetStringRep()
     {
         return $"{_goalType}:{_name},{_description},{_points},{_numberOfCompletions},{_maxGoals},{_bonusPoints}";
     }

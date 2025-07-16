@@ -6,51 +6,92 @@ public class Goals
     private List<BaseGoal> goals = new List<BaseGoal>();
     private string _fileName;
     private int _totalScore;
+    public Goals()
+    {
+        _totalScore = 0;
+    }
     public void AddGoal(BaseGoal goal)
     {
         goals.Add(goal);
     }
     public void SaveGoals()
     {
-        _fileName = ObtainFileName("Enter a file to save to: ");
+        _fileName = ObtainFileName("Enter a file to save to (default 'develop05_goals.txt'): ");
         using (StreamWriter outputFile = new StreamWriter(_fileName))
         {
             outputFile.WriteLine(_totalScore);
             foreach (BaseGoal goal in goals)
             {
-                outputFile.WriteLine(goal.ToString());
+                outputFile.WriteLine(goal.GetStringRep());
             }
         }
-        Console.WriteLine($"Your goal has been saved to {_fileName}");
+        Console.WriteLine($"Your goal has been saved to '{_fileName}'");
     }
     public void LoadGoals()
     {
-        _fileName = ObtainFileName("Enter a file to load from: ");
+        _fileName = ObtainFileName("Enter a file to load from (default 'develop05_goals.txt'): ");
         if (File.Exists(_fileName))
         {
-            goals.Clear();
-            string[] lines = File.ReadAllLines(_fileName);
-            foreach (string line in lines)
+            try
             {
-                string[] parts = line.Split('#');
-                // if (parts.Length != 2)
-                // {
-                //     continue;
-                // }
-                string goalType = parts[0];
-                string[] data = parts[1].Split("#");
-                switch (goalType)
+                goals.Clear();
+                string[] lines = File.ReadAllLines(_fileName);
+
+                if (lines.Length > 0 && int.TryParse(lines[0], out int loadedScore))
                 {
-                    case "SimpleGoal":
-                        goals.Add(new SimpleGoal(data[0], data[1], int.Parse(data[2]), bool.Parse(data[3])));
-                        break;
-                    case "EternalGoal":
-                        goals.Add(new EternalGoal(data[0], data[1], int.Parse(data[2]), bool.Parse(data[3]), int.Parse(data[4])));
-                        break;
-                    case "CheckListGoal":
-                        goals.Add(new ChecklistGoal(data[0], data[1], int.Parse(data[2]), bool.Parse(data[3]), int.Parse(data[4]), int.Parse(data[5]), int.Parse(data[6])));
-                        break;
+                    _totalScore = loadedScore;
                 }
+                else
+                {
+                    _totalScore = 0;
+                    Console.WriteLine("Warning: Could not read or parse total score.");
+                }
+                for (int i = 1; i < lines.Length; i++)
+                {
+                    string line = lines[i];
+                    string[] parts = line.Split('#');
+                    if (parts.Length < 2)
+                    {
+                        Console.WriteLine($"Warning: Skipping malformed line during load: {line}");
+                        continue;
+                    }
+                    string goalType = parts[0];
+                    string[] data = parts[1].Split(";");
+
+                    BaseGoal goal = null;
+                    try
+                    {
+                        switch (goalType)
+                        {
+                            case "SimpleGoal":
+                                goals.Add(new SimpleGoal(data[0], data[1], int.Parse(data[2]), bool.Parse(data[3])));
+                                break;
+                            case "EternalGoal":
+                                goals.Add(new EternalGoal(data[0], data[1], int.Parse(data[2]), bool.Parse(data[3]), int.Parse(data[4])));
+                                break;
+                            case "CheckListGoal":
+                                goals.Add(new ChecklistGoal(data[0], data[1], int.Parse(data[2]), bool.Parse(data[3]), int.Parse(data[4]), int.Parse(data[5]), int.Parse(data[6])));
+                                break;
+                        }
+                    }
+                    catch (FormatException ex)
+                    {
+                        Console.WriteLine($"Error parsing data for goal type {goalType} in line: {line}. Details: {ex.Message}");
+                    }
+                    if (goal != null)
+                    {
+                        goals.Add(goal);
+                    }
+                }
+                Console.WriteLine($"Goals loaded from '{_fileName}'");
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine($"File '{_fileName}' not found.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected error occurred while loading goals: {ex.Message}");
             }
         }
         else
@@ -62,11 +103,9 @@ public class Goals
     {
         if (goals.Count != 0)
         {
-            int i = 1;
-            foreach (BaseGoal goal in goals)
+            for (int i = 0; i < goals.Count; i++)
             {
-                Console.WriteLine($"{i}. {goal.ListGoal()}");
-                i++;
+                Console.WriteLine($"{i + 1}. {goals[i].ListGoal()}");
             }
         }
         else
@@ -80,13 +119,22 @@ public class Goals
     }
     public void RecordEvent()
     {
+        if (goals.Count == 0)
+        {
+            Console.WriteLine("No goals to record for.");
+        }
         Console.WriteLine("Which goal did you accomplish?");
         DisplayGoals();
+        Console.Write("Enter the number of the goal: ");
         if (int.TryParse(Console.ReadLine(), out int index) && index <= goals.Count && index > 0)
         {
             int earned = goals[index - 1].RecordEvent();
             _totalScore += earned;
             Console.WriteLine($"Points earned: {earned}");
+        }
+        else
+        {
+            Console.WriteLine("Invalid input. Please try again.");
         }
     }
     private string ObtainFileName(string prompt)
