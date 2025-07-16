@@ -43,7 +43,7 @@ public abstract class BaseGoal
     }
     public virtual string ListGoal()
     {
-        return $"{_name} - {_description}";
+        return $"{_name} - {_description}, Points: {_points}";
     }
     public override string ToString()
     {

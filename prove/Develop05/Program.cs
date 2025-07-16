@@ -6,11 +6,11 @@ class Program
     {
         Menu menu = new Menu();
         Goals goals = new Goals();
+        int menuInput;
 
-        bool running = true;
-        while (running)
+        do
         {
-            int menuInput = menu.DisplayMenu();
+            menuInput = menu.DisplayMenu();
             switch (menuInput)
             {
                 case 1:
@@ -62,7 +62,7 @@ class Program
                 default:
                     Console.WriteLine("Invalid input. Please try again.");
                     break;
-            } while (menuInput != 0);
-        }
+            }
+        } while (menuInput != 0);
     }
 }

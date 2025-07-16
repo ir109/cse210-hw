@@ -23,6 +23,5 @@ public class SimpleGoal : BaseGoal
             return GetPoints();
         }
         return 0;
-    }
-    
+    }    
 }

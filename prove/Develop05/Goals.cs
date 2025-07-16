@@ -12,25 +12,34 @@ public class Goals
     }
     public void SaveGoals()
     {
-        Console.Write("Enter a file name to save: ");
-        _fileName = Console.ReadLine();
+        _fileName = ObtainFileName("Enter a file to save to: ");
         using (StreamWriter outputFile = new StreamWriter(_fileName))
         {
+            outputFile.WriteLine(_totalScore);
             foreach (BaseGoal goal in goals)
+            {
                 outputFile.WriteLine(goal.ToString());
+            }
         }
+        Console.WriteLine($"Your goal has been saved to {_fileName}");
     }
     public void LoadGoals()
     {
+        _fileName = ObtainFileName("Enter a file to load from: ");
         if (File.Exists(_fileName))
         {
-            Console.Write("Enter a file name to load: ");
+            goals.Clear();
             string[] lines = File.ReadAllLines(_fileName);
             foreach (string line in lines)
             {
                 string[] parts = line.Split('#');
-                string[] data = parts[1].Split(";");
-                switch (parts[0])
+                // if (parts.Length != 2)
+                // {
+                //     continue;
+                // }
+                string goalType = parts[0];
+                string[] data = parts[1].Split("#");
+                switch (goalType)
                 {
                     case "SimpleGoal":
                         goals.Add(new SimpleGoal(data[0], data[1], int.Parse(data[2]), bool.Parse(data[3])));
@@ -44,14 +53,25 @@ public class Goals
                 }
             }
         }
+        else
+        {
+            Console.WriteLine($"\nFile '{_fileName}' not found\n");
+        }
     }
     public void DisplayGoals()
     {
-        int i = 1;
-        foreach (BaseGoal goal in goals)
+        if (goals.Count != 0)
         {
-            Console.WriteLine($"{i}. {goal.ListGoal()}");
-            i++;
+            int i = 1;
+            foreach (BaseGoal goal in goals)
+            {
+                Console.WriteLine($"{i}. {goal.ListGoal()}");
+                i++;
+            }
+        }
+        else
+        {
+            Console.WriteLine("There are no saved goals to display.");
         }
     }
     public void DisplayScore()
@@ -69,8 +89,9 @@ public class Goals
             Console.WriteLine($"Points earned: {earned}");
         }
     }
-    // private string ObtainFileName(string fileName)
-    // {
-    //     _fileName = fileName;
-    // }
+    private string ObtainFileName(string prompt)
+    {
+        Console.Write(prompt);
+        return Console.ReadLine();
+    }
 }

@@ -26,16 +26,17 @@ public class ChecklistGoal : BaseGoal
     }
     public override int RecordEvent()
     {
-        _numberOfCompletions++;
-    
-        _numberOfCompletions++;
-        if (_numberOfCompletions >= _maxGoals)
+        if (_numberOfCompletions < _maxGoals)
         {
-            MarkComplete();
-            return GetPoints() + _bonusPoints;
+            _numberOfCompletions++;
+            if (_numberOfCompletions == _maxGoals)
+            {
+                MarkComplete();
+                return GetPoints() + _bonusPoints;
+            }
+            return GetPoints();
         }
-    
-        return GetPoints();
+        return 0;
     }
     public override string ToString()
     {
