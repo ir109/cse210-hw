@@ -26,6 +26,6 @@ public class SimpleGoal : BaseGoal
     }
     public override string GetStringRep()
     {
-        return $"{_goalType}:{_name},{_description},{_points},{_status}";
+        return $"{_goalType}#{_name}#{_description}#{_points}#{_status}";
     }
 }

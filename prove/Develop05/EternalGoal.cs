@@ -25,7 +25,7 @@ public class EternalGoal : BaseGoal
     }
     public override string GetStringRep()
     {
-        return $"{_goalType}:{_name},{_description},{_points},{_status},{_numberOfCompletions}";
+        return $"{_goalType}#{_name}#{_description}#{_points}#{_status}#{_numberOfCompletions}";
     }
 }
 

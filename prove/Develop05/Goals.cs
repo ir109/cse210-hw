@@ -56,21 +56,21 @@ public class Goals
                         continue;
                     }
                     string goalType = parts[0];
-                    string[] data = parts[1].Split(";");
+                    // string[] data = parts[1].Split("#");
 
-                    BaseGoal goal = null;
+                    BaseGoal loadedGoal = null;
                     try
                     {
                         switch (goalType)
                         {
                             case "SimpleGoal":
-                                goals.Add(new SimpleGoal(data[0], data[1], int.Parse(data[2]), bool.Parse(data[3])));
+                                loadedGoal = (new SimpleGoal(parts[1], parts[2], int.Parse(parts[3]), bool.Parse(parts[4])));
                                 break;
                             case "EternalGoal":
-                                goals.Add(new EternalGoal(data[0], data[1], int.Parse(data[2]), bool.Parse(data[3]), int.Parse(data[4])));
+                                loadedGoal = (new EternalGoal(parts[1], parts[2], int.Parse(parts[3]), bool.Parse(parts[4]), int.Parse(parts[5])));
                                 break;
                             case "CheckListGoal":
-                                goals.Add(new ChecklistGoal(data[0], data[1], int.Parse(data[2]), bool.Parse(data[3]), int.Parse(data[4]), int.Parse(data[5]), int.Parse(data[6])));
+                                loadedGoal = (new ChecklistGoal(parts[1], parts[2], int.Parse(parts[3]), bool.Parse(parts[4]), int.Parse(parts[5]), int.Parse(parts[6]), int.Parse(parts[7])));
                                 break;
                         }
                     }
@@ -78,9 +78,13 @@ public class Goals
                     {
                         Console.WriteLine($"Error parsing data for goal type {goalType} in line: {line}. Details: {ex.Message}");
                     }
-                    if (goal != null)
+                    catch (IndexOutOfRangeException ex)
                     {
-                        goals.Add(goal);
+                        Console.WriteLine($"Error: not enough data parts for {goalType} in line {line}. Details: {ex.Message}");
+                    }
+                    if (loadedGoal != null)
+                    {
+                        goals.Add(loadedGoal);
                     }
                 }
                 Console.WriteLine($"Goals loaded from '{_fileName}'");
@@ -108,9 +112,10 @@ public class Goals
                 Console.WriteLine($"{i + 1}. {goals[i].ListGoal()}");
             }
         }
-        else
+        if (goals.Count == 0)
         {
             Console.WriteLine("There are no saved goals to display.");
+            return;
         }
     }
     public void DisplayScore()
@@ -140,6 +145,11 @@ public class Goals
     private string ObtainFileName(string prompt)
     {
         Console.Write(prompt);
-        return Console.ReadLine();
+        string fileName = Console.ReadLine();
+        if (string.IsNullOrWhiteSpace(fileName))
+        {
+            return "develop05_goals.txt";
+        }
+        return fileName;
     }
 }

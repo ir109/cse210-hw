@@ -40,7 +40,7 @@ public class ChecklistGoal : BaseGoal
     }
     public override string GetStringRep()
     {
-        return $"{_goalType}:{_name},{_description},{_points},{_numberOfCompletions},{_maxGoals},{_bonusPoints}";
+        return $"{_goalType}#{_name}#{_description}#{_points}#{_numberOfCompletions}#{_maxGoals}#{_bonusPoints}";
     }
     public override string ListGoal()
     {

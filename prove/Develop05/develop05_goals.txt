@@ -1,2 +1,3 @@
 0
-SimpleGoal:Test goal,test,1,False
+EternalGoal#Etest#test#1#False#0
+#ctest#test#2#0#3#4
